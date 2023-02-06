@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const cors = require("cors");
 const morgan = require("morgan");
-
+mongoose.set("strictQuery", false);
 
 const app = express();
 
@@ -26,5 +26,3 @@ const connectAndStartServer = async () => {
   }
 };
 connectAndStartServer();
-
-
