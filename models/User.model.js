@@ -2,18 +2,20 @@ const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
   name: { type: String, required: true },
-  login: { type: String, required: true },
+  login: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   cart: [
     {
       productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product",
       },
-      count: Number,
+      count: { type: Number },
     },
   ],
-  capital: Number,
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  capital: { type: Number },
 });
 
 const User = mongoose.model("User", userSchema);

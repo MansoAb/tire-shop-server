@@ -6,8 +6,9 @@ require("dotenv").config();
 module.exports.userController = {
   signUp: async (req, res) => {
     try {
-      const { name, login, password } = req.body;
-      const result = await User.findOne({ login });
+      const { name, email, login, password } = req.body;
+      const isLogin = await User.findOne({ login });
+      const isEmail = await User.findOne({ email });
 
       if (!name) {
         return res.json({
@@ -27,13 +28,19 @@ module.exports.userController = {
         });
       }
 
-      if (result) {
+      if (isLogin) {
         return res.json({
           error: "Пользователь с таким логином уже существует",
         });
       }
+
+      if (isEmail) {
+        return res.json({
+          error: "Пользователь с таким email уже существует",
+        });
+      }
       const hash = await bcrypt.hash(password, Number(process.env.BCRYPT_SEC));
-      const user = await User.create({ name, login, password: hash });
+      const user = await User.create({ name, email, login, password: hash });
 
       const payload = {
         name: user.name,
