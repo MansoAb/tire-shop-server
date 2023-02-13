@@ -4,20 +4,80 @@ const nodemailer = require("nodemailer");
 module.exports.productsController = {
   addProduct: async (req, res) => {
     const productPicture =
-      "http://localhost:4040/images/" + req.file.originalname;
-    const { productName, productDescription, price } = req.body;
+      "http://localhost:4040/images/" +
+      req.file.originalname.replaceAll(" ", "_");
+    const {
+      productName,
+      productDescription,
+      price,
+      tireWidth,
+      tireHeight,
+      tireDiameter,
+      tireCompany,
+      car,
+      season,
+      tireType,
+      tireModel,
+    } = req.body;
     try {
       const product = await Product.create({
         productName,
         productDescription,
         price,
         productPicture,
+        tireWidth,
+        tireHeight,
+        tireDiameter,
+        tireCompany,
+        car,
+        season,
+        tireType,
+        tireModel,
       });
       res.json(product);
     } catch (error) {
       res.json(error);
     }
   },
+
+  getProducts: async (req, res) => {
+    const obj = req.body.tireArray;
+    try {
+      const query = {};
+      for (const key in obj) {
+        if (obj[key] !== false || obj[key] !== 0) {
+          query[key] = obj[key];
+        }
+      }
+
+      // const res = await Product.find(query);
+
+      const products = await Product.find();
+      res.json(products);
+    } catch (error) {
+      res.json(error);
+    }
+  },
+
+  filterProducts: async (req, res) => {
+    const obj = req.body.tireArray[0];
+
+    try {
+      const query = {};
+      for (const key in obj) {
+        if (obj[key] !== false && obj[key] !== 0) {
+          query[key] = obj[key];
+        }
+      }
+      const products = await Product.find(query);
+      res.json(products);
+    } catch (error) {
+      res.json(error);
+    }
+  },
+
+
+
   sendEmail: async (req, res) => {
     const { name, lastname, number, email, product, volume, sum } = req.body;
     try {
@@ -65,15 +125,7 @@ module.exports.productsController = {
       return res.json(error);
     }
   },
-  getProducts: async (req, res) => {
-    try {
-      const products = await Product.find();
-      console.log(products);
-      return res.json(products);
-    } catch (error) {
-      res.json({ error: error.message });
-    }
-  },
+
   autocompleteProducts: async (req, res) => {
     const { searchProduct } = req.body;
 
