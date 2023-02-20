@@ -7,9 +7,7 @@ router.post("/post", image.single("image"), productsController.addProduct);
 // router.post("/email", productsController.sendEmail);
 router.get("/", productsController.getProducts);
 router.post("/", productsController.filterProducts);
-// router.post("/autocomplete", productsController.autocompleteProducts);
+router.get("/product/:id", productsController.getProduct);
 // router.post("/feedback", productsController.sendForm);
 
-
 module.exports = router;
-
