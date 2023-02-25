@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
-const commentSchema = mongoose.Schema(
+const reviewSchema = mongoose.Schema(
   {
-    textComment: {
-      type: mongoose.Schema.Types.ObjectId,
+    textReview: {
+      type: String,
       require: true,
     },
     userId: {
@@ -22,5 +22,5 @@ const commentSchema = mongoose.Schema(
   }
 );
 
-const Comment = mongoose.model("Comment", commentSchema);
-module.exports = Comment;
+const Review = mongoose.model("Review", reviewSchema);
+module.exports = Review;
