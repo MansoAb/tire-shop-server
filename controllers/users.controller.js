@@ -97,4 +97,16 @@ module.exports.userController = {
       return res.json(error);
     }
   },
+  isAuth: async (req, res) => {
+    const { id } = req.user;
+    try {
+      if (id === undefined || id.length === 0) {
+        return res.json(Error);
+      }
+
+      return res.json("auth");
+    } catch (error) {
+      return res.json(Error);
+    }
+  },
 };
