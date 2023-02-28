@@ -5,15 +5,6 @@ const userSchema = mongoose.Schema({
   login: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  cart: [
-    {
-      productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-      },
-      count: { type: Number },
-    },
-  ],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   capital: { type: Number },
 });
