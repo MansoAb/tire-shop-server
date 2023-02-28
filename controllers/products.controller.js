@@ -71,6 +71,20 @@ module.exports.productsController = {
       res.json(error);
     }
   },
+  getProductsById: async (req, res) => {
+    const {arr} = req.body 
+
+    try {
+      const products = []
+      for(let i = 0; i < arr.length; i++){
+        const prod = await Product.findById(arr[i])
+        products.push(prod)
+      }
+      return res.json(products)
+    } catch (error) {
+      return res.json(Error)
+    }
+  },
 
   filterProducts: async (req, res) => {
     const obj = req.body.tireArray[0];

@@ -6,6 +6,10 @@ const router = Router()
 router.post("/add", authMiddleware, cartControllers.addProd)
 router.post("/addProds", authMiddleware, cartControllers.addProducts)
 router.post("/isInCart", authMiddleware, cartControllers.isInCart)
+router.get("/getProductsFromCart", authMiddleware, cartControllers.getAllProds)
+router.post("/delete", authMiddleware, cartControllers.delProd)
+
+
 
 
 
