@@ -5,14 +5,16 @@ module.exports.reviewsController = {
   addReview: async (req, res) => {
     const { id } = req.user;
     const { textReview, productId } = req.body;
-    console.log(id);
+    console.log(textReview);
     try {
       const review = await Review.create({
         textReview,
         userId: id,
         productId,
       });
-      const reviews = await Review.find().populate("userId");
+      const reviews = await Review.find({ productId: productId }).populate(
+        "userId"
+      );
       res.json(reviews);
     } catch (error) {
       res.json(error);
