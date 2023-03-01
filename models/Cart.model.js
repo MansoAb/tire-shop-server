@@ -4,10 +4,7 @@ const cartSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-    products: {
-        type: mongoose.Schema.Types.Array,
-        default: []
-    }
+    products: []
 })
 
 module.exports.Cart = mongoose.model("Cart", cartSchema)
