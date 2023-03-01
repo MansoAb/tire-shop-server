@@ -38,7 +38,7 @@ module.exports.cartControllers = {
 
         await prods[0].save();
         
-        return res.json(prods);
+        return res.json([prods, prodId, checked]);
       }
     } catch (error) {
       return res.json(Error);
