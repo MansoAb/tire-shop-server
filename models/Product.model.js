@@ -13,7 +13,7 @@ const productSchema = mongoose.Schema({
   tireModel: { type: String, required: true },
   car: [{ type: mongoose.Schema.Types.ObjectId, ref: "Car" }],
   season: { type: String, required: true },
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
 });
 
 const Product = mongoose.model("Product", productSchema);
