@@ -1,6 +1,4 @@
 const Product = require("../models/Product.model");
-const nodemailer = require("nodemailer");
-const { find, findById } = require("../models/Product.model");
 
 module.exports.productsController = {
   addProduct: async (req, res) => {
@@ -72,17 +70,17 @@ module.exports.productsController = {
     }
   },
   getProductsById: async (req, res) => {
-    const {arr} = req.body 
+    const { arr } = req.body;
 
     try {
-      const products = []
-      for(let i = 0; i < arr.length; i++){
-        const prod = await Product.findById(arr[i])
-        products.push(prod)
+      const products = [];
+      for (let i = 0; i < arr.length; i++) {
+        const prod = await Product.findById(arr[i]);
+        products.push(prod);
       }
-      return res.json(products)
+      return res.json(products);
     } catch (error) {
-      return res.json(Error)
+      return res.json(Error);
     }
   },
 
