@@ -70,15 +70,17 @@ module.exports.productsController = {
     }
   },
   getProductsById: async (req, res) => {
-    const { arr } = req.body;
+    const {arr} = req.body 
+    console.log("Mans")
 
     try {
-      const products = [];
-      for (let i = 0; i < arr.length; i++) {
-        const prod = await Product.findById(arr[i]);
-        products.push(prod);
+      const products = []
+      for(let i = 0; i < arr.length; i++){
+        const prod = await Product.findById(arr[i].id)
+        products.push({count: arr[i].count, checked: arr[i].checked, _doc: prod})
       }
-      return res.json(products);
+      console.log(products)
+      return res.json(products)
     } catch (error) {
       return res.json(Error);
     }

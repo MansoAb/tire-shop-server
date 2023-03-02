@@ -9,7 +9,7 @@ router.post("/post", image.single("image"), productsController.addProduct);
 router.get("/", productsController.getProducts);
 router.post("/", productsController.filterProducts);
 router.get("/product/:id", productsController.getProduct);
-router.post("/products", authMiddleware, productsController.getProductsById);
+router.post("/products", productsController.getProductsById);
 
 // router.post("/feedback", productsController.sendForm);
 
