@@ -1,6 +1,4 @@
 const Product = require("../models/Product.model");
-const nodemailer = require("nodemailer");
-const { find, findById } = require("../models/Product.model");
 
 module.exports.productsController = {
   addProduct: async (req, res) => {
@@ -84,7 +82,7 @@ module.exports.productsController = {
       console.log(products)
       return res.json(products)
     } catch (error) {
-      return res.json(Error)
+      return res.json(Error);
     }
   },
 
